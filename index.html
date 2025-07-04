@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon-32x32.png">
+
+	<!-- Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" type="text/css" href="styles/reset.css">
+	<link rel="stylesheet" type="text/css" href="styles/global-variables.css">
+	<link rel="stylesheet" type="text/css" href="styles/styles.css">
+
+	<!-- Scripts -->
+	<script defer src="scripts/main.js"></script>
+
+  <title>Frontend Mentor | Password generator app</title>
+</head>
+<body>
+	<main class="main-app">
+		<h1 class="main-app__title text-preset-2">Password Generator</h1>
+		<section class="main-app__container">
+			<div class="main-app__output bg-app">
+				<p class="main-app__gen-pass text-preset-1 placeholder">P4$5W0rD!</p>
+				<button class="main-app__copy-btn"><img alt="An icon meaning the action of copy" src="img/icon-copy.svg"></button>
+			</div>
+			<div class="main-app__input bg-app">
+				<form class="main-app__input-form">
+					<div class="main-app__slider">
+						<label class="pass-lenght-label" for="pass-length">
+							<span class="slider-label text-preset-3">Character length</span>
+							<span class="slider-value text-preset-1">0</span>
+						</label>
+						<div class="main-app_slider-container">
+							<input class="main-app__slider-input" type="range" min="0" max="20" id="pass-length" name="pass-length">
+						</div>
+					</div>
+
+					<div class="main-app__checkboxes">
+						<label class="main__app-checkbox">
+							<input class="main-app__input-checkbox" type="checkbox">
+							<span class="custom-checkbox"></span>
+							<span class="main-app__checkbox-label text-preset-3">Include Uppercase Letters</span>
+						</label>
+						<label class="main__app-checkbox">
+							<input class="main-app__input-checkbox" type="checkbox">
+							<span class="custom-checkbox"></span>
+							<span class="main-app__checkbox-label text-preset-3">Include Lowercase Letters</span>
+						</label>
+						<label class="main__app-checkbox">
+							<input class="main-app__input-checkbox" type="checkbox">
+							<span class="custom-checkbox"></span>
+							<span class="main-app__checkbox-label text-preset-3">Include Numbers</span>
+						</label>
+						<label class="main__app-checkbox">
+							<input class="main-app__input-checkbox" type="checkbox">
+							<span class="custom-checkbox"></span>
+							<span class="main-app__checkbox-label text-preset-3">Include Symbols</span>
+						</label>
+					</div>
+
+					<div class="main-app__bottom-box">
+						<div class="main-app__strength">
+							<p class="strength__text text-preset-3">Strength</p>
+							<div class="strength__rating-box">
+								<p class="strength__current-rating">Strong</p>
+								<div class="strength__rating-bars">
+									<div class="strength__bar"></div>
+									<div class="strength__bar"></div>
+									<div class="strength__bar"></div>
+									<div class="strength__bar"></div>
+								</div>
+							</div>
+						</div>
+						<button class="main-app__generate-button" type="button">Generate <span class="button-arrow">&rarr;</span></button>
+					</div>
+				</form>
+			</div>
+		</section>
+	</main>
+</body>
+</html>

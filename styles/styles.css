@@ -1,0 +1,283 @@
+
+/* General styles */
+html {
+    font-size: 62.5%;
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: var(--font-mono), sans-serif;
+    font-weight: bold;
+    color: var(--white);
+    background-color: var(--grey-950);
+}
+
+/* =================== Main app =================== */
+.main-app {
+    display: flex;
+    width: 52.8rem;
+    max-width: 52.8rem;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-400);
+}
+
+.main-app__title {
+    color: var(--grey-600);
+}
+
+.main-app__container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: var(--spacing-300);
+}
+
+/*  =================== Main app output =================== */
+.main-app__output {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-200) var(--spacing-400);
+}
+
+.placeholder {
+    color: var(--grey-700);
+}
+
+.main-app__copy-btn {
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.main-app__input {
+
+}
+
+/*  =================== Main input =================== */
+.main-app__input {
+    padding: var(--spacing-300) var(--spacing-400);
+}
+
+.main-app__input-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-400);
+}
+
+/*  Input slider */
+.main-app__slider {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-200);
+}
+
+.pass-lenght-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.slider-value {
+    color: var(--green-200);
+}
+
+.main-app__slider-input {
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: var(--grey-850);
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.main-app__slider-input:hover {
+    opacity: 1;
+}
+
+/* Chrome, edge, safari */
+.main-app__slider-input::-moz-range-thumb {
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    background: white;
+}
+
+.main-app__slider-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    background: white;
+}
+
+/* Input checkboxes */
+.main-app__checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-200);
+}
+
+.main__app-checkbox {
+    position: relative;
+    display: flex;
+    gap: var(--spacing-300);
+    align-items: center;
+}
+
+.main-app__input-checkbox {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+.custom-checkbox {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid var(--white);
+    transition: background-color 0.2s, border 0.2s;
+}
+
+.custom-checkbox:hover {
+    cursor: pointer;
+    border: 2px solid var(--green-200);
+}
+
+.main-app__input-checkbox:checked + .custom-checkbox {
+    border: none;
+    background-color: var(--green-200);
+    background-image: url('../img/icon-check.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* ========== Bottom box =================== */
+.main-app__bottom-box {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-400);
+}
+
+.main-app__strength {
+    background-color: var(--grey-850);
+    padding: var(--spacing-300) var(--spacing-400);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.strength__text {
+    color: var(--grey-600);
+    text-transform: uppercase;
+}
+
+.strength__rating-box {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-200);
+}
+
+.strength__current-rating {
+    font-size: 2.4rem;
+}
+
+.strength__rating-bars {
+    display: flex;
+    gap: var(--spacing-100);
+}
+
+.strength__bar {
+    width: 10px;
+    height: 28px;
+    outline: 2px solid var(--white);
+}
+
+/* Generate button */
+.button-arrow {
+    display: inline-block;
+    margin-left: var(--spacing-300);
+}
+
+.main-app__generate-button {
+    border: none;
+    border-radius: 0;
+    width: 100%;
+    padding: var(--spacing-200) var(--spacing-2000);
+    font-size: 1.8rem;
+    background-color: var(--green-200);
+    color: var(--black);
+    transition: outline 0.2s, background-color 0.2s, color 0.2s;
+}
+
+.main-app__generate-button:hover {
+    cursor: pointer;
+    outline: 2px solid var(--green-200);
+    background-color: var(--grey-800);
+    color: var(--green-200);
+}
+
+/* =================== Reusable classes =================== */
+.text-preset-1 {
+    font-size: var(--text-1-size);
+    line-height: var(--text-1-line-height);
+    letter-spacing: var(--text-1-letter-spacing);
+}
+
+.text-preset-2 {
+    font-size: var(--text-2-size);
+    line-height: var(--text-2-line-height);
+    letter-spacing: var(--text-2-letter-spacing);
+}
+
+.text-preset-3 {
+    font-size: var(--text-3-size);
+    line-height: var(--text-3-line-height);
+    letter-spacing: var(--text-3-letter-spacing);
+}
+
+.text-preset-4 {
+    font-size: var(--text-4-size);
+    line-height: var(--text-4-line-height);
+    letter-spacing: var(--text-4-letter-spacing);
+}
+
+.bg-app {
+    background-color: var(--grey-800);
+}
+
+/* ====== Media queries ====== */
+@media (max-width: 550px) {
+
+    html {
+        font-size: 50%;
+    }
+    .main-app {
+        max-width: 343px;
+    }
+
+    .main-app__strength {
+        padding: var(--spacing-200);
+    }
+
+    .main-app__generate-button {
+        padding: var(--spacing-200) var(--spacing-1300);
+    }
+}
