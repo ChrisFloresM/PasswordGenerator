@@ -59,9 +59,6 @@ body {
     cursor: pointer;
 }
 
-.main-app__input {
-
-}
 
 /*  =================== Main input =================== */
 .main-app__input {
@@ -124,6 +121,16 @@ body {
     border-radius: 50%;
     cursor: pointer;
     background: white;
+}
+
+.main-app__slider-input::-moz-range-thumb:active {
+    background-color: var(--black);
+    border: 2px solid var(--green-200);
+}
+
+.main-app__slider-input::-webkit-slider-thumb:active {
+    background-color: var(--black);
+    border: 2px solid var(--green-200);
 }
 
 /* Input checkboxes */
@@ -234,6 +241,30 @@ body {
     color: var(--green-200);
 }
 
+/* Dynamic classes */
+.rating-hidden {
+    display: none;
+}
+
+.strength__rating-bars.rated-too-weak .strength__bar:nth-child(-n + 1) {
+    outline: 2px solid var(--red-500);
+    background-color: var(--red-500);
+}
+
+.strength__rating-bars.rated-weak .strength__bar:nth-child(-n + 2) {
+    outline: 2px solid var(--orange-400);
+    background-color: var(--orange-400);
+}
+
+.strength__rating-bars.rated-medium .strength__bar:nth-child(-n + 3) {
+    outline: 2px solid var(--yellow-300);
+    background-color: var(--yellow-300);
+}
+
+.strength__rating-bars.rated-strong .strength__bar:nth-child(-n + 4) {
+    outline: 2px solid var(--green-200);
+    background-color: var(--green-200);
+}
 /* =================== Reusable classes =================== */
 .text-preset-1 {
     font-size: var(--text-1-size);
