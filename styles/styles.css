@@ -58,6 +58,9 @@ body {
     background: transparent;
     cursor: pointer;
 }
+.main-app__copy-btn svg {
+
+}
 
 
 /*  =================== Main input =================== */
