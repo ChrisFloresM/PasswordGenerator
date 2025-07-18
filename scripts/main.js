@@ -72,7 +72,7 @@ function generatePassword() {
 
 	/* Validate the user inputs: at least one checkbox is selected and the len is enought for all the type of characters */
 	if (!checkedInputs.length || passwordAttributes.passwordLen < checkedInputs.length) {
-		alert("Input length is uncompatible with requested password attributes")
+		alert("Input length is incompatible with requested password attributes")
 		return;
 	}
 
@@ -125,7 +125,7 @@ function shuffleCharacters(inputSequence) {
 	let i = inputSequence.length;
 
 	while(i > 0) {
-		const j = getRandomCharacter(i);
+		const j = getRandomNumber(i);
 		[inputSequence[j], inputSequence[i]] = [inputSequence[i], inputSequence[j]];
 		i--;
 	}
@@ -141,24 +141,24 @@ function calculateStrength(totalPossibleChars) {
 	console.log(passwordEntropy);
 
 	if (passwordEntropy < 40) {
-		updateStrenghtUI('too-weak');
+		updateStrengthUI('too-weak');
 		return;
 	}
 
 	if (passwordEntropy < 60) {
-		updateStrenghtUI('weak');
+		updateStrengthUI('weak');
 		return;
 	}
 
 	if (passwordEntropy < 80) {
-		updateStrenghtUI('medium');
+		updateStrengthUI('medium');
 		return;
 	}
 
-	updateStrenghtUI('strong');
+	updateStrengthUI('strong');
 }
 
-function updateStrenghtUI(strength) {
+function updateStrengthUI(strength) {
 	const passwordStrengthUI = document.querySelector('.strength__current-rating');
 	const ratingBars = document.querySelector('.strength__rating-bars');
 	const ratingClasses = [
@@ -181,11 +181,12 @@ function updateStrenghtUI(strength) {
 
 function copyButtonListener() {
 	if (copyClipboardButton.classList.contains('copied')) return;
-	copyPasword();
+
+	copyPassword();
 }
 
 /* Copy functionality */
-async function copyPasword() {
+async function copyPassword() {
 	/* Do not copy if it is the placeholder (no password generated yet) */
 	if (passwordEl.classList.contains('placeholder')) {
 		alert('Please, generate a password first!');
