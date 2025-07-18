@@ -2,7 +2,16 @@
 const slider = document.getElementById('pass-length');
 const sliderValue = document.querySelector('.slider-value');
 
-slider.addEventListener('input', sliderListener);
+/* Checkboxes */
+const checkboxes = document.querySelectorAll('.main-app__input-checkbox');
+
+/* Generate button */
+const generateButton = document.querySelector('.main-app__generate-button');
+
+/* Password UI */
+const passwordEl = document.querySelector('.main-app__gen-pass');
+
+
 
 const passwordAttributes = {
 	passwordLen: 0,
@@ -10,6 +19,25 @@ const passwordAttributes = {
 	includeLowercase: false,
 	includeNumbers: false,
 	includeSymbols: false
+}
+
+const optionCharacters = {
+	lowercase: "abcdefghijklmnopqrstuvwxyz",
+	uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+	numbers: "0123456789",
+	symbols: "!@#$%^&*()_+-=[]{}|;:',.<>?/`~"
+}
+
+document.addEventListener('DOMContentLoaded', init)
+
+function init() {
+	/* Event listeners */
+	slider.addEventListener('input', sliderListener);
+	checkboxes.forEach(checkbox => checkbox.addEventListener('change', checkboxListener));
+
+	/* Call for initial setup of password */
+	sliderListener.call(slider);
+	checkboxes.forEach(checkbox => checkboxListener.call(checkbox));
 }
 
 /* ================= Slider functionality ================= */
@@ -27,6 +55,126 @@ function updateSliderUI(sliderEl) {
 	slider.style.background = `linear-gradient(90deg, var(--green-200) ${currentPercentage}%, var(--grey-850) ${currentPercentage}%)`;
 }
 
-/* Testing crypto.getRandomValues */
-const buffer = new Uint32Array(1)
-console.log(window.crypto.getRandomValues(buffer));
+/* ================= Checkboxes functionality ================= */
+function checkboxListener() {
+	passwordAttributes[this.dataset.attribute] = this.checked;
+}
+
+generateButton.addEventListener('click', generatePassword);
+
+function generatePassword() {
+	let validCharacters = "";
+	let generatedPass = "";
+
+	const checkedInputs = document.querySelectorAll('.main-app__input-checkbox:checked');
+
+	/* Validate the user inputs: at least one checkbox is selected and the len is enought for all the type of characters */
+	if (!checkedInputs.length || passwordAttributes.passwordLen < checkedInputs.length) {
+		alert("Input length is uncompatible with requested password attributes")
+		return;
+	}
+
+	if (passwordAttributes.includeLowercase) {
+		generatedPass += getRandomCharacter(optionCharacters.lowercase);
+		validCharacters += optionCharacters.lowercase;
+	}
+
+	if (passwordAttributes.includeUppercase) {
+		generatedPass += getRandomCharacter(optionCharacters.uppercase);
+		validCharacters += optionCharacters.uppercase;
+	}
+
+	if (passwordAttributes.includeNumbers) {
+		generatedPass += getRandomCharacter(optionCharacters.numbers);
+		validCharacters += optionCharacters.numbers;
+	}
+
+	if (passwordAttributes.includeSymbols) {
+		generatedPass += getRandomCharacter(optionCharacters.symbols);
+		validCharacters += optionCharacters.symbols;
+	}
+
+	while(generatedPass.length < passwordAttributes.passwordLen) {
+		generatedPass += getRandomCharacter(validCharacters);
+	}
+
+	updatePasswordUI(shuffleCharacters(generatedPass));
+	calculateStrength(validCharacters.length);
+}
+
+function updatePasswordUI(password) {
+	passwordEl.textContent = password;
+	passwordEl.classList.remove('placeholder');
+}
+
+
+function getRandomNumber(maxLen) {
+	const buffer = new Uint32Array(1);
+	return window.crypto.getRandomValues(buffer)[0] % (maxLen);
+}
+
+function getRandomCharacter(sourceString) {
+	return sourceString[getRandomNumber(sourceString.length)];
+}
+
+/* Shuffle using Fisher-Yates shuffle algorithm */
+function shuffleCharacters(inputSequence) {
+	let i = inputSequence.length;
+
+	while(i > 0) {
+		const j = getRandomCharacter(i);
+		[inputSequence[j], inputSequence[i]] = [inputSequence[i], inputSequence[j]];
+		i--;
+	}
+	return inputSequence;
+}
+
+function calculateStrength(totalPossibleChars) {
+	/* Calculate entropy E = L * log2(R)
+		L: password length
+		R: Amount of possible characters
+	*/
+	const passwordEntropy = passwordAttributes.passwordLen * Math.log2(totalPossibleChars);
+	console.log(passwordEntropy);
+
+	if (passwordEntropy < 40) {
+		updateStrenghtUI('too-weak');
+		return;
+	}
+
+	if (passwordEntropy < 60) {
+		updateStrenghtUI('weak');
+		return;
+	}
+
+	if (passwordEntropy < 80) {
+		updateStrenghtUI('medium');
+		return;
+	}
+
+	updateStrenghtUI('strong');
+	return;
+}
+
+function updateStrenghtUI(strength) {
+	const passwordStrengthUI = document.querySelector('.strength__current-rating');
+	const ratingBars = document.querySelector('.strength__rating-bars');
+	const ratingClasses = [
+		'rated-too-weak',
+		'rated-weak',
+		'rated-medium',
+		'rated-strong'
+	]
+
+	/* Display the strength text in the UI */
+	if (passwordStrengthUI.classList.contains('rating-hidden')) {
+		passwordStrengthUI.classList.remove('rating-hidden');
+	}
+	passwordStrengthUI.textContent = strength.toUpperCase();
+
+	/* Set the appropiate class to the rating bars */
+	ratingBars.classList.remove(...ratingClasses);
+	ratingBars.classList.add(`rated-${strength}`);
+}
+
+

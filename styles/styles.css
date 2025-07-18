@@ -246,7 +246,7 @@ body {
 
 /* Dynamic classes */
 .rating-hidden {
-    display: none;
+    opacity: 0;
 }
 
 .strength__rating-bars.rated-too-weak .strength__bar:nth-child(-n + 1) {
