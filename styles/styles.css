@@ -55,11 +55,31 @@ body {
 .main-app__copy-btn {
     border: none;
     outline: none;
+    position: relative;
     background: transparent;
     cursor: pointer;
 }
-.main-app__copy-btn svg {
 
+.main-app__copy-btn svg {
+    color: var(--white);
+}
+
+.copy-btn__copy-feedback-text {
+    position: absolute;
+    top: -2rem;
+    left: 50%;
+    transform: translate(-50%);
+    opacity: 0;
+    font-size: 1rem;
+    color: var(--green-200);
+}
+
+.main-app__copy-btn.copied svg{
+    color: var(--green-200);
+}
+
+.main-app__copy-btn.copied .copy-btn__copy-feedback-text {
+    opacity: 1;
 }
 
 
@@ -223,7 +243,7 @@ body {
 /* Generate button */
 .button-arrow {
     display: inline-block;
-    margin-left: var(--spacing-300);
+    margin-left: var(--spacing-100);
 }
 
 .main-app__generate-button {

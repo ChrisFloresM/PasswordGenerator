@@ -11,6 +11,8 @@ const generateButton = document.querySelector('.main-app__generate-button');
 /* Password UI */
 const passwordEl = document.querySelector('.main-app__gen-pass');
 
+/* Copy to clipboard button */
+const copyClipboardButton = document.querySelector('.main-app__copy-btn');
 
 
 const passwordAttributes = {
@@ -34,6 +36,8 @@ function init() {
 	/* Event listeners */
 	slider.addEventListener('input', sliderListener);
 	checkboxes.forEach(checkbox => checkbox.addEventListener('change', checkboxListener));
+	generateButton.addEventListener('click', generatePassword);
+	copyClipboardButton.addEventListener('click', copyButtonListener);
 
 	/* Call for initial setup of password */
 	sliderListener.call(slider);
@@ -59,8 +63,6 @@ function updateSliderUI(sliderEl) {
 function checkboxListener() {
 	passwordAttributes[this.dataset.attribute] = this.checked;
 }
-
-generateButton.addEventListener('click', generatePassword);
 
 function generatePassword() {
 	let validCharacters = "";
@@ -100,6 +102,7 @@ function generatePassword() {
 
 	updatePasswordUI(shuffleCharacters(generatedPass));
 	calculateStrength(validCharacters.length);
+	resetCopyUI();
 }
 
 function updatePasswordUI(password) {
@@ -153,7 +156,6 @@ function calculateStrength(totalPossibleChars) {
 	}
 
 	updateStrenghtUI('strong');
-	return;
 }
 
 function updateStrenghtUI(strength) {
@@ -177,4 +179,35 @@ function updateStrenghtUI(strength) {
 	ratingBars.classList.add(`rated-${strength}`);
 }
 
+function copyButtonListener() {
+	if (copyClipboardButton.classList.contains('copied')) return;
+	copyPasword();
+}
 
+/* Copy functionality */
+async function copyPasword() {
+	/* Do not copy if it is the placeholder (no password generated yet) */
+	if (passwordEl.classList.contains('placeholder')) {
+		alert('Please, generate a password first!');
+		return;
+	}
+
+	/* Asynchronous wirteText() method */
+	try {
+		await navigator.clipboard.writeText(passwordEl.textContent);
+		updateCopyUI();
+	} catch {
+		alert('An error occured when trying to copy');
+	}
+}
+
+function updateCopyUI() {
+	if (copyClipboardButton.classList.contains('copied')) return;
+	copyClipboardButton.classList.add('copied');
+}
+
+function resetCopyUI() {
+	if (copyClipboardButton.classList.contains('copied')) {
+		copyClipboardButton.classList.remove('copied');
+	}
+}
