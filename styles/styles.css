@@ -327,6 +327,10 @@ body {
         max-width: 343px;
     }
 
+    .main-app__gen-pass {
+        font-size: var(--text-2-size);
+    }
+
     .main-app__strength {
         padding: var(--spacing-200);
     }
