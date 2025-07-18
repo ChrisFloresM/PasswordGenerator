@@ -120,8 +120,6 @@ body {
     transition: opacity 0.2s;
 }
 
-
-
 /* Chrome, edge, safari */
 .main-app__slider-input::-moz-range-thumb {
     appearance: none;

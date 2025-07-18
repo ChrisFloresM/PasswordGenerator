@@ -137,20 +137,26 @@ function calculateStrength(totalPossibleChars) {
 		L: password length
 		R: Amount of possible characters
 	*/
+	const entroypyThresholds = {
+		tooWeak: 40,
+		weak: 60,
+		medium: 80
+	}
+
 	const passwordEntropy = passwordAttributes.passwordLen * Math.log2(totalPossibleChars);
 	console.log(passwordEntropy);
 
-	if (passwordEntropy < 40) {
+	if (passwordEntropy < entroypyThresholds.tooWeak) {
 		updateStrengthUI('too-weak');
 		return;
 	}
 
-	if (passwordEntropy < 60) {
+	if (passwordEntropy < entroypyThresholds.weak) {
 		updateStrengthUI('weak');
 		return;
 	}
 
-	if (passwordEntropy < 80) {
+	if (passwordEntropy < entroypyThresholds.medium) {
 		updateStrengthUI('medium');
 		return;
 	}
