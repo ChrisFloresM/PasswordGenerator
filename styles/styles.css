@@ -120,9 +120,7 @@ body {
     transition: opacity 0.2s;
 }
 
-.main-app__slider-input:hover {
-    opacity: 1;
-}
+
 
 /* Chrome, edge, safari */
 .main-app__slider-input::-moz-range-thumb {
@@ -184,11 +182,6 @@ body {
     height: 2rem;
     border: 2px solid var(--white);
     transition: background-color 0.2s, border 0.2s;
-}
-
-.custom-checkbox:hover {
-    cursor: pointer;
-    border: 2px solid var(--green-200);
 }
 
 .main-app__input-checkbox:checked + .custom-checkbox {
@@ -257,13 +250,6 @@ body {
     transition: outline 0.2s, background-color 0.2s, color 0.2s;
 }
 
-.main-app__generate-button:hover {
-    cursor: pointer;
-    outline: 2px solid var(--green-200);
-    background-color: var(--grey-800);
-    color: var(--green-200);
-}
-
 /* Dynamic classes */
 .rating-hidden {
     opacity: 0;
@@ -315,6 +301,25 @@ body {
 
 .bg-app {
     background-color: var(--grey-800);
+}
+
+/* ===== manage hover states ===== */
+@media (hover: hover) {
+    .custom-checkbox:hover {
+        cursor: pointer;
+        border: 2px solid var(--green-200);
+    }
+
+    .main-app__slider-input:hover {
+        opacity: 1;
+    }
+
+    .main-app__generate-button:hover {
+        cursor: pointer;
+        outline: 2px solid var(--green-200);
+        background-color: var(--grey-800);
+        color: var(--green-200);
+    }
 }
 
 /* ====== Media queries ====== */
